@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Для Юлі ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-accent: #ff2d55;
+            --soft-pink: #ffdae0;
+            --glass-white: rgba(255, 255, 255, 0.88);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            height: 100dvh;
+            margin: 0;
+            padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+            background: linear-gradient(145deg, #fff1f2 0%, #ffd1dc 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Анімований фон */
+        .particles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Головна картка у стилі Glassmorphism */
+        .valentine-card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 360px;
+            background: var(--glass-white);
+            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(25px);
+            border-radius: 44px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 30px 60px -12px rgba(255, 45, 85, 0.15), 
+                        0 18px 36px -18px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Контейнер для фото */
+        .photo-wrap {
+            width: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: #fff;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+        
+        img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.3s ease;
+        }
+
+        /* Текст */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary-accent);
+            font-size: 30px;
+            margin: 0 0 28px 0;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        /* Кнопки */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 0;
+            border-radius: 22px;
+            border: none;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+        }
+
+        #yes-btn {
+            background: var(--primary-accent);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255, 45, 85, 0.35);
+        }
+
+        #no-btn {
+            background: #f2f2f7;
+            color: #3a3a3c;
+        }
+
+        /* Активні стани (для тач-скрінів) */
+        .btn:active {
+            transform: scale(0.94);
+            filter: brightness(0.9);
+        }
+
+        /* Анімація сердечок при фіналі */
+        .heart-pop {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            animation: popUp 2.5s ease-out forwards;
+        }
+
+        @keyframes popUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-600px) scale(2) rotate(45deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="valentine-card" id="main-card">
+        <div class="photo-wrap">
+            <img id="status-img" src="https://i.ibb.co/whJNr3BD/image.jpg" alt="Photo">
+        </div>
+
+        <h1 id="main-text">Юля, ти будеш моєю Валентинкою?</h1>
+
+        <div class="btn-group" id="controls">
+            <button class="btn" id="no-btn" onclick="sayNo()">Ні</button>
+            <button class="btn" id="yes-btn" onclick="sayYes()">Так ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        const statusImg = document.getElementById('status-img');
+        const mainText = document.getElementById('main-text');
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const card = document.getElementById('main-card');
+
+        // Твої посилання на картинки
+        const imgNo = "https://i.ibb.co/TBMXnpRv/image.jpg";
+        const imgYes = "https://i.ibb.co/397gn0RN/2.jpg";
+
+        function sayNo() {
+            statusImg.src = imgNo;
+            mainText.innerHTML = "Оні( 😭"; // Змінено за проханням
+            mainText.style.fontFamily = "'Inter', sans-serif";
+            mainText.style.fontWeight = "800";
+            
+            noBtn.style.display = 'none';
+            yesBtn.style.width = '100%';
+            yesBtn.innerHTML = 'Натиснути ТАК ✨';
+            
+            // Ефект "тремтіння" картки
+            card.animate([
+                { transform: 'translateX(-5px)' },
+                { transform: 'translateX(5px)' },
+                { transform: 'translateX(0)' }
+            ], { duration: 200, iterations: 2 });
+        }
+
+        function sayYes() {
+            statusImg.src = imgYes;
+            mainText.innerHTML = "УРА! Перемога буде! 🥳";
+            mainText.style.fontFamily = "'Pacifico', cursive";
+            
+            document.getElementById('controls').style.display = 'none';
+            
+            // Запуск святкового ефекту
+            for(let i=0; i<40; i++) {
+                setTimeout(launchHeart, i * 80);
+            }
+        }
+
+        function launchHeart() {
+            const h = document.createElement('div');
+            h.className = 'heart-pop';
+            h.innerHTML = ['❤️', '💖', '💐', '✨'][Math.floor(Math.random() * 4)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = '100dvh';
+            h.style.left = Math.random() * 100 + '%';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 2500);
+        }
+
+        // Плавний паралакс при русі (тільки для iPhone з акселерометром або просто при тапі)
+        document.addEventListener('touchstart', (e) => {
+            const moveX = (e.touches[0].clientX - window.innerWidth / 2) / 25;
+            card.style.transform = `rotateY(${moveX}deg) rotateX(${-moveX}deg)`;
+        });
+        document.addEventListener('touchend', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+</html>
